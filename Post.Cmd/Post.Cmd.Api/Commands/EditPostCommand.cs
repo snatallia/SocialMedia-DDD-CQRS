@@ -2,9 +2,8 @@
 
 namespace Post.Cmd.Api.Commands
 {
-    public class NewPostCommands: BaseCommand
+    public class EditPostCommand: BaseCommand
     {
-        public string Author { get; set; }
         public string Message { get; set; }
     }
 }

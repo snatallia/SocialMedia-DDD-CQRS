@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Post.Cmd.Infrastructure.Dispatchers
 {
-    internal class CommandDispatcher : ICommandDispatcher
+    public class CommandDispatcher : ICommandDispatcher
     {
         private readonly Dictionary<Type, Func<BaseCommand, Task>> handlers = new();
 

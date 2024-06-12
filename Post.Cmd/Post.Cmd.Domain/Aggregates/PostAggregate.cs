@@ -42,7 +42,7 @@ namespace Post.Cmd.Domain.Aggregates
             _author = createdEvent.Author;
         }
 
-        public void EditMessage(string message)
+        public void EditPost(string message)
         {
             if (!_active)
             {
