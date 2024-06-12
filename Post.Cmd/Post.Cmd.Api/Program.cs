@@ -8,6 +8,9 @@ using Post.Cmd.Infrastructure.Handlers;
 using Post.Cmd.Infrastructure.Repositories;
 using Post.Cmd.Infrastructure.Stores;
 using Post.Cmd.Infrastructure.Dispatchers;
+using Confluent.Kafka;
+using Post.Cmd.Infrastructure.Producers;
+using CQRS.Core.Producers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +18,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection(nameof(MongoDbConfig)));
+builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection(nameof(ProducerConfig)));
+
 builder.Services.AddScoped<IEventStoreRepository,EventStoreRepository>();
+builder.Services.AddScoped<IEventProducer,EventProducer>();
 builder.Services.AddScoped<IEventStore,EventStore>();
 builder.Services.AddScoped<IEventSourcingHandler<PostAggregate>, EventSourcingHandler>();
 builder.Services.AddScoped<ICommandHandler, CommandHandler>();
