@@ -12,6 +12,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+//Create database tables from code 
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+dbContext.Database.EnsureCreated();
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
