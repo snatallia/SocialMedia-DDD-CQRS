@@ -1,11 +1,19 @@
 using Microsoft.EntityFrameworkCore;
+using Post.Query.Domain.Repositories;
 using Post.Query.Infrastructure.DataAccess;
+using Post.Query.Infrastructure.Handles;
+using Post.Query.Infrastructure.Repositories;
+using EventHandler = Post.Query.Infrastructure.Handles.EventHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Action<DbContextOptionsBuilder> configeDbContext = (o => o.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 builder.Services.AddDbContext<DatabaseContext>(configeDbContext);
 builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory(configeDbContext));
+
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IEventHandler, EventHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
