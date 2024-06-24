@@ -18,10 +18,4 @@
     <ProjectReference Include="..\Post.Cmd.Infrastructure\Post.Cmd.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="CQRS.Core">
-      <HintPath>..\..\..\CQRS-ES\CQRS.Core\bin\Debug\net8.0\CQRS.Core.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

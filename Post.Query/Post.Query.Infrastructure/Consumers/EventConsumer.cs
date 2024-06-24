@@ -3,7 +3,7 @@ using CQRS.Core.Consumers;
 using CQRS.Core.Events;
 using Microsoft.Extensions.Options;
 using Post.Query.Infrastructure.Converters;
-using Post.Query.Infrastructure.Handles;
+using Post.Query.Infrastructure.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,14 +42,14 @@ namespace Post.Query.Infrastructure.Consumers
                 };
                 
                 var @event = JsonSerializer.Deserialize<BaseEvent>(result.Message.Value,options);
-                var handerMethod = eventHandler.GetType().GetMethod("On", new Type[] { @event.GetType() });
+                var handlerMethod = eventHandler.GetType().GetMethod("On", new Type[] { @event.GetType() });
 
-                if (handerMethod != null) 
+                if (handlerMethod == null) 
                 {
-                    throw new ArgumentNullException(nameof(handerMethod),"Could not find event handler method!");
+                    throw new ArgumentNullException(nameof(handlerMethod),"Could not find event handler method!");
                 }
 
-                handerMethod.Invoke(eventHandler, new object[] { @event });
+                handlerMethod.Invoke(eventHandler, new object[] { @event });
                 consumer.Commit(result);
 
             }

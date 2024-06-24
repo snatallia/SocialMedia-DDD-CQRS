@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Post.Query.Infrastructure.Handles
+namespace Post.Query.Infrastructure.Handlers
 {
     public class EventHandler : IEventHandler
     {
