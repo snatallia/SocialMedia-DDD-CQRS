@@ -2,7 +2,7 @@
 
 namespace Post.Query.Api.Queries
 {
-    public class FindAlPostsQuery:BaseQuery
+    public class FindAllPostsQuery:BaseQuery
     {
     }
 }
