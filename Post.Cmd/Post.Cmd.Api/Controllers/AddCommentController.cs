@@ -9,27 +9,27 @@ namespace Post.Cmd.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class LikePostController : ControllerBase
+    public class AddCommentController : ControllerBase
     {
-        private readonly ILogger<LikePostController> logger;
+        private readonly ILogger<AddCommentController> logger;
         private readonly ICommandDispatcher commandDispatcher;
 
-        public LikePostController(ILogger<LikePostController> logger, ICommandDispatcher commandDispatcher)
+        public AddCommentController(ILogger<AddCommentController> logger, ICommandDispatcher commandDispatcher)
         {
             this.logger = logger;
             this.commandDispatcher = commandDispatcher;
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> LikePostAsync(Guid id)
+        public async Task<ActionResult> AddCommentAsync(Guid id, AddCommentCommand command)
         {
             try
             {
-                
-                await commandDispatcher.SendAsync(new LikePostCommand { Id = id});
+                command.Id = id;
+                await commandDispatcher.SendAsync(command);
                 return Ok(new BaseResponse
                 {
-                    Message = "Like to post request completed successfully."
+                    Message = "Add comment request completed successfully."
                 });
             }
             catch (InvalidOperationException ex)
@@ -50,7 +50,7 @@ namespace Post.Cmd.Api.Controllers
             }
             catch (Exception ex)
             {
-                const string SAFE_ERROR_MESSAGE = "Error while processing request to like a post.";
+                const string SAFE_ERROR_MESSAGE = "Error while processing request to add comment to a post.";
                 logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
                 return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
                 {

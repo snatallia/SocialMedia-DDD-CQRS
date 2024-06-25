@@ -37,10 +37,6 @@ namespace Post.Cmd.Infrastructure.Stores
         public async Task SaveEventsAsync(Guid aggregateId, IEnumerable<BaseEvent> events, int expectedVersion)
         {
             var eventStream = await eventStoreRepo.FindByAggregateId(aggregateId);
-            /*if (eventStream == null || !eventStream.Any())
-            {
-                throw new AggregateNotFoundException("Not found aggregate. Incorrect post ID provided.");
-            }*/
 
             if (expectedVersion != -1 && eventStream[^1].Version != expectedVersion)
             {

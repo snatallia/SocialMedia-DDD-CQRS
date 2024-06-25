@@ -118,8 +118,8 @@ namespace Post.Cmd.Domain.Aggregates
             {
                 throw new InvalidOperationException("You cannot edit a comment of an inactive post!");
             }
-
-            if (!_comments[commentId].Item2.Equals(username, StringComparison.CurrentCultureIgnoreCase))
+            var commentusername = _comments[commentId].Item2;
+            if (!commentusername.Equals(username, StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new InvalidOperationException("You are not allowed to edit a comment that was made by another user!");
             }
