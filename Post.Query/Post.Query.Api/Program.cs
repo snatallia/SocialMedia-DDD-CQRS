@@ -31,9 +31,9 @@ var queryHandler = builder.Services.BuildServiceProvider().GetRequiredService<IQ
 var dispatcher = new QueryDispatcher();
 dispatcher.RegisterHandler<FindAllPostsQuery>(queryHandler.HandleAsync);
 dispatcher.RegisterHandler<FindPostByIdQuery>(queryHandler.HandleAsync);
-dispatcher.RegisterHandler<FindPostsByAuthor>(queryHandler.HandleAsync);
+dispatcher.RegisterHandler<FindPostsByAuthorQuery>(queryHandler.HandleAsync);
 dispatcher.RegisterHandler<FindPostsWithCommentsQuery>(queryHandler.HandleAsync);
-dispatcher.RegisterHandler<FindPostsWithLikes>(queryHandler.HandleAsync);
+dispatcher.RegisterHandler<FindPostsWithLikesQuery>(queryHandler.HandleAsync);
 builder.Services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => dispatcher);
 
 
@@ -60,5 +60,5 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+app.MapControllers();
 app.Run();

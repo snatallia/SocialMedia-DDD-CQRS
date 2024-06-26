@@ -23,7 +23,7 @@ namespace Post.Query.Api.Queries
             return new List<PostEntity> { post };
         }
 
-        public async Task<List<PostEntity>> HandleAsync(FindPostsByAuthor query)
+        public async Task<List<PostEntity>> HandleAsync(FindPostsByAuthorQuery query)
         {
             return await postRepository.GetAllByAuthorAsync(query.Author);
         }
@@ -33,7 +33,7 @@ namespace Post.Query.Api.Queries
             return await postRepository.GetWithCommentsAsync();
         }
 
-        public async Task<List<PostEntity>> HandleAsync(FindPostsWithLikes query)
+        public async Task<List<PostEntity>> HandleAsync(FindPostsWithLikesQuery query)
         {
             return await postRepository.GetWithLikesAsync(query.NumberOfLikes);
         }

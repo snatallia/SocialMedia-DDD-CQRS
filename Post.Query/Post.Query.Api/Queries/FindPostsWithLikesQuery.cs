@@ -2,7 +2,7 @@
 
 namespace Post.Query.Api.Queries
 {
-    public class FindPostsWithLikes: BaseQuery
+    public class FindPostsWithLikesQuery: BaseQuery
     {
         public int NumberOfLikes { get; set; }
     }
